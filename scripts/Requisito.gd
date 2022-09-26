@@ -6,8 +6,9 @@ extends Area2D
 
 onready var screensize = Vector2()
 onready var rnd = RandomNumberGenerator.new()
+onready var flagT
 
-# Called when the node enters the scene tree for the first time.
+#Quando o objeto é chamado, ele se inicia em uma posição aleatória acima da tela
 func _ready():
 	screensize = get_viewport_rect().size
 	rnd.randomize()
@@ -15,11 +16,15 @@ func _ready():
 	position.x = random
 	pass # Replace with function body.
 
-
+#A cada frame ele se move para baixo
 func _process(delta):
 	
 	position.y += (100 *delta)
 	
 
+func _change_Flag(flag):
+	flagT = flag
+
+#Ao colidir com qualquer área, player ou "chão", se deleta
 func _on_Area2D_area_entered(area):
 	self.queue_free()
